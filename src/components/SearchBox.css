@@ -1,0 +1,40 @@
+.searchbox-container {
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .search-results {
+    position: absolute;
+    width: 100%;
+    background: rgb(51, 59, 200);
+    border: 1px solid #400a92;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .result-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .result-item:hover {
+    background: #ca1515;
+  }
+  
+  .loader,
+  .no-results {
+    margin-top: 10px;
+    font-style: italic;
+  }
+  

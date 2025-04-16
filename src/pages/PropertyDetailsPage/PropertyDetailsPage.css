@@ -1,0 +1,79 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+  }
+  
+  .modal-content {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: center;
+    padding: 20px;
+  
+
+  }
+  
+  .modal-content img {
+    width: 840px;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffffff;
+    color: #333;
+    border: none;
+    padding: 8px 12px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .property-slider img {
+    width: 320px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.2s ease;
+  }
+  
+  .property-slider img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  .property-slider {
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .property-slider img.slider-thumbnail {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .property-slider img.slider-thumbnail:hover {
+    transform: scale(1.05);
+  }
+    
