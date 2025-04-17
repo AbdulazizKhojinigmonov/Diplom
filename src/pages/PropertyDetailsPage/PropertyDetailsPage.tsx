@@ -36,8 +36,8 @@ const PropertyDetailsPage: React.FC = () => {
   if (!property) return <div>Данные не найдены</div>;
 
   return (
-    <div className="property-details-page">
-      <div className="property-section">
+    <div className="page-container">
+      <div className="property-details-box">
         <div className="property-slider">
           {property.photos?.slice(0, 10).map((photo: any, index: number) => (
             <img
@@ -45,7 +45,7 @@ const PropertyDetailsPage: React.FC = () => {
               src={photo.url}
               alt={`Photo ${index}`}
               onClick={() => setSelectedImage(photo.url)}
-              style={{ cursor: "pointer" }}
+              className="slider-thumbnail"
             />
           ))}
         </div>
@@ -65,21 +65,21 @@ const PropertyDetailsPage: React.FC = () => {
             )}
           </p>
         </div>
-      </div>
 
-      <div className="agency-section">
-        <h3>Агентства:</h3>
-        {agencies.length > 0 ? (
-          agencies.map((agency) => (
-            <div key={agency.id} className="agency-card">
-              <img src={agency.logo?.url} alt={agency.name} className="agency-logo" />
-              <p>{agency.name}</p>
-              <p>{agency.phoneNumber?.mobile}</p>
-            </div>
-          ))
-        ) : (
-          <p>Агентства не найдены</p>
-        )}
+        <div className="agency-section">
+          <h3>Агентства:</h3>
+          {agencies.length > 0 ? (
+            agencies.map((agency) => (
+              <div key={agency.id} className="agency-card">
+                <img src={agency.logo?.url} alt={agency.name} className="agency-logo" />
+                <p>{agency.name}</p>
+                <p>{agency.phoneNumber?.mobile}</p>
+              </div>
+            ))
+          ) : (
+            <p>Агентства не найдены</p>
+          )}
+        </div>
       </div>
 
       {selectedImage && (
