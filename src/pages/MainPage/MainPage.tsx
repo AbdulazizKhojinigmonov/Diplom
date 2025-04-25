@@ -1,25 +1,25 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import "swiper/css"
-import "swiper/css/navigation";
+
 import "./Main.css";
 import Logo from "../../assets/logo.svg";
 import Home1 from "../../assets/home1.webp";
 import Home2 from "../../assets/home2.webp";
 import Home3 from "../../assets/home3.webp";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; // Импортируем useSelector для доступа к состоянию
 import { logout } from "../../store/authSlice";
 import SearchBox from "../../components/SearchBox"; 
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isAuthenticated = useSelector((state: any) => state.auth.isAuthenticated); // Получаем статус аутентификации
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/login'); 
+    navigate('/login');  // Перенаправляем на страницу входа
   };
 
   return (
@@ -31,16 +31,17 @@ const Header: React.FC = () => {
             <li><a href="#about" className="nav-link">О нас</a></li>
             <li><a href="#services" className="nav-link">Услуги</a></li>
             <li><a href="#contacts" className="nav-link">Контакты</a></li>
-            <li><button onClick={handleLogout} className="nav-link logout-btn">Log Out</button></li>
+            {isAuthenticated ? (
+              <li><button onClick={handleLogout} className="nav-link logout-btn">Log Out</button></li>
+            ) : (
+              <li><a href="/login" className="nav-link">Войти</a></li> // Переход на страницу логина, если не авторизован
+            )}
           </ul>
         </nav>
       </div>
-     
     </header>
   );
 };
-
-
 
 const Landing: React.FC = () => {
   return (
@@ -53,7 +54,6 @@ const Landing: React.FC = () => {
     </section>
   );
 };
-
 
 const Slider: React.FC = () => {
   return (

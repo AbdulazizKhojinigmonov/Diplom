@@ -12,7 +12,7 @@
   .search-results {
     position: absolute;
     width: 100%;
-    background: rgb(51, 59, 200);
+    background: rgb(116, 183, 238);
     border: 1px solid #400a92;
     z-index: 10;
     max-height: 200px;

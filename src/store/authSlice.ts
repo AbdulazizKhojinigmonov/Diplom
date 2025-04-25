@@ -7,7 +7,7 @@ interface User {
 
 interface AuthState {
   isAuthenticated: boolean;
-  user: User | null; // Make sure 'user' is here
+  user: User | null;
 }
 
 const loadUserFromStorage = (): User | null => {
@@ -16,8 +16,8 @@ const loadUserFromStorage = (): User | null => {
 };
 
 const initialState: AuthState = {
-  isAuthenticated: !!loadUserFromStorage(),
   user: loadUserFromStorage(),
+  isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
 };
 
 const authSlice = createSlice({
@@ -27,15 +27,17 @@ const authSlice = createSlice({
     register: (state, action: PayloadAction<User>) => {
       localStorage.setItem("user", JSON.stringify(action.payload));
       state.user = action.payload;
-      state.isAuthenticated = true;
+      state.isAuthenticated = false; // После регистрации нужно логиниться
     },
     login: (state, action: PayloadAction<User>) => {
-      localStorage.setItem("user", JSON.stringify(action.payload));
       state.user = action.payload;
       state.isAuthenticated = true;
+      localStorage.setItem("user", JSON.stringify(action.payload));
+      localStorage.setItem("isAuthenticated", "true");
     },
     logout: (state) => {
       localStorage.removeItem("user");
+      localStorage.removeItem("isAuthenticated");
       state.user = null;
       state.isAuthenticated = false;
     },

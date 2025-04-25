@@ -17,7 +17,7 @@ export const fetchSuggestions = async (query: string) => {
   return data.hits;
 };
 
-// Получение деталей недвижимости
+// Получение деталей недвижимости 
 export const fetchPropertyDetails = async (externalID: string) => {
   const url = `https://bayut.p.rapidapi.com/properties/detail?externalID=${externalID}`;
   const options = {

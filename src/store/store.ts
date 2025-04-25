@@ -1,12 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./authSlice"; // Ensure this path is correct
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './authSlice'; // Убедись, что путь верный
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer, // This must match how we access state
+    auth: authReducer, // имя должно совпадать
   },
 });
 
-// Define RootState correctly
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
