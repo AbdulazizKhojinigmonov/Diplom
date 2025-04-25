@@ -8,6 +8,7 @@ const SearchBox: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Функция для получения предложений по запросу
   const fetchSuggestions = async (search: string) => {
     if (!search) return;
 
@@ -18,14 +19,14 @@ const SearchBox: React.FC = () => {
         {
           method: "GET",
           headers: {
-            "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY,
+            "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY, // Убедитесь, что ключ в env файле корректен
             "x-rapidapi-host": "bayut.p.rapidapi.com",
           },
         }
       );
 
-      const data = await res.json();
-      setResults(data.hits || []);
+      const data = await res.json();  // Используем .json() для обработки JSON
+      setResults(data.hits || []);  // Обрабатываем полученные данные
     } catch (err) {
       console.error("Ошибка получения данных:", err);
     } finally {
@@ -33,14 +34,16 @@ const SearchBox: React.FC = () => {
     }
   };
 
+  // Обработка изменения в поле ввода
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    fetchSuggestions(value);
+    fetchSuggestions(value);  // Запрос для получения предложений
   };
 
+  // Обработка выбора элемента из предложений
   const handleSelect = (item: any) => {
-    navigate("/card", { state: { item } });
+    navigate("/card", { state: { item } });  // Перенаправляем на страницу карточки
   };
 
   return (
@@ -61,7 +64,7 @@ const SearchBox: React.FC = () => {
               className="search-item"
               onClick={() => handleSelect(item)}
             >
-              {item.name || item.slug}
+              {item.name || item.slug}  {/* Отображаем название или slug элемента */}
             </li>
           ))}
         </ul>
