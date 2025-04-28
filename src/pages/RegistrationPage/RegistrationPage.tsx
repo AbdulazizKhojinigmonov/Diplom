@@ -20,21 +20,20 @@ const RegistrationPage: React.FC = () => {
 
   const handleSubmit = (values: { username: string; password: string }) => {
     try {
-      // Проверка на существующего пользователя в localStorage
       const existingUser = localStorage.getItem("user");
+
       if (existingUser) {
-        alert("Пользователь с таким именем уже существует!");
-        return;
+        const parsedUser = JSON.parse(existingUser);
+        if (parsedUser.username === values.username) {
+          alert("Пользователь с таким именем уже существует!");
+          return;
+        }
       }
 
-      // Регистрируем нового пользователя
       const newUser = { username: values.username, password: values.password };
       dispatch(register(newUser));
-      localStorage.setItem("user", JSON.stringify(newUser));  // Сохраняем пользователя в localStorage
-      localStorage.setItem("isAuthenticated", "true");  // Ставим статус аутентификации
-      alert("Регистрация успешна!"); // Уведомление об успешной регистрации
-
-      navigate("/login");  // Переход на страницу входа
+      alert("Регистрация успешна!");
+      navigate("/login");
     } catch (error) {
       console.error("Ошибка регистрации:", error);
       alert("Произошла ошибка при регистрации.");
@@ -57,34 +56,19 @@ const RegistrationPage: React.FC = () => {
             <Form className="registration-form">
               <div className="form-group">
                 <label>Имя пользователя</label>
-                <Field
-                  name="username"
-                  type="text"
-                  className="input-field"
-                  placeholder="Введите имя пользователя"
-                />
+                <Field name="username" type="text" className="input-field" placeholder="Введите имя пользователя" />
                 <ErrorMessage name="username" component="div" className="error-message" />
               </div>
 
               <div className="form-group">
                 <label>Пароль</label>
-                <Field
-                  name="password"
-                  type="password"
-                  className="input-field"
-                  placeholder="Введите пароль"
-                />
+                <Field name="password" type="password" className="input-field" placeholder="Введите пароль" />
                 <ErrorMessage name="password" component="div" className="error-message" />
               </div>
 
               <div className="form-group">
                 <label>Подтвердите пароль</label>
-                <Field
-                  name="confirmPassword"
-                  type="password"
-                  className="input-field"
-                  placeholder="Подтвердите пароль"
-                />
+                <Field name="confirmPassword" type="password" className="input-field" placeholder="Подтвердите пароль" />
                 <ErrorMessage name="confirmPassword" component="div" className="error-message" />
               </div>
 

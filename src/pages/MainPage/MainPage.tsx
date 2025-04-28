@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; // Импортируем useSelector для доступа к состоянию
 import { logout } from "../../store/authSlice";
 import SearchBox from "../../components/SearchBox"; 
+import LogoutButton from "../../components/LogoutButton";
+
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -31,11 +33,7 @@ const Header: React.FC = () => {
             <li><a href="#about" className="nav-link">О нас</a></li>
             <li><a href="#services" className="nav-link">Услуги</a></li>
             <li><a href="#contacts" className="nav-link">Контакты</a></li>
-            {isAuthenticated ? (
-              <li><button onClick={handleLogout} className="nav-link logout-btn">Log Out</button></li>
-            ) : (
-              <li><a href="/login" className="nav-link">Войти</a></li> // Переход на страницу логина, если не авторизован
-            )}
+            <LogoutButton />
           </ul>
         </nav>
       </div>

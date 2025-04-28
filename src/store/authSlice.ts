@@ -27,7 +27,7 @@ const authSlice = createSlice({
     register: (state, action: PayloadAction<User>) => {
       localStorage.setItem("user", JSON.stringify(action.payload));
       state.user = action.payload;
-      state.isAuthenticated = false; // После регистрации нужно логиниться
+      state.isAuthenticated = false;
     },
     login: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
@@ -36,10 +36,9 @@ const authSlice = createSlice({
       localStorage.setItem("isAuthenticated", "true");
     },
     logout: (state) => {
-      localStorage.removeItem("user");
-      localStorage.removeItem("isAuthenticated");
-      state.user = null;
+    
       state.isAuthenticated = false;
+      
     },
   },
 });

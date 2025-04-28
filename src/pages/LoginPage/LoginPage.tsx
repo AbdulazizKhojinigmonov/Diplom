@@ -1,45 +1,41 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { login } from "../../store/authSlice"; // Импортируем login из Redux
+import { login } from "../../store/authSlice";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import './Login.css';
-import '../../App.css';
+import "./Login.css";
+import "../../App.css";
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loginSchema = Yup.object().shape({
-    username: Yup.string().required('Обязательно'),
-    password: Yup.string().required('Обязательно'),
+    username: Yup.string().required("Обязательно"),
+    password: Yup.string().required("Обязательно"),
   });
 
   const handleSubmit = (values: { username: string; password: string }) => {
     try {
-      const savedUser = localStorage.getItem('user'); // Получаем данные из localStorage
-  
+      const savedUser = localStorage.getItem("user");
+
       if (!savedUser) {
-        alert('Пользователь не зарегистрирован!');
-        return; // Если пользователя нет, показываем ошибку
+        alert("Пользователь не зарегистрирован!");
+        return;
       }
-  
-      const parsedUser = JSON.parse(savedUser); // Парсим данные
-  
-      if (
-        parsedUser.username === values.username && 
-        parsedUser.password === values.password
-      ) {
-        // Если имя и пароль совпадают, логиним через Redux
+
+      const parsedUser = JSON.parse(savedUser);
+
+      if (parsedUser.username === values.username && parsedUser.password === values.password) {
         dispatch(login(parsedUser));
-        navigate('/');  // Перенаправляем на главную страницу
+        navigate("/");
       } else {
-        alert('Неверный логин или пароль!');
+        alert("Неверный логин или пароль!");
       }
     } catch (error) {
-      console.error('Ошибка логина:', error);
-      alert('Произошла ошибка при входе.');
+      console.error("Ошибка логина:", error);
+      alert("Произошла ошибка при входе.");
     }
   };
 
@@ -48,9 +44,9 @@ const LoginPage: React.FC = () => {
       <div className="login-card">
         <h2 className="login-title">Вход в аккаунт</h2>
         <p className="login-subtitle">Введите данные для входа в систему</p>
-        
+
         <Formik
-          initialValues={{ username: '', password: '' }}
+          initialValues={{ username: "", password: "" }}
           validationSchema={loginSchema}
           onSubmit={handleSubmit}
         >
@@ -61,7 +57,7 @@ const LoginPage: React.FC = () => {
                 <Field id="username" name="username" type="text" className="form-input" />
                 <ErrorMessage name="username" component="div" className="error-message" />
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="password" className="form-label">Пароль</label>
                 <Field id="password" name="password" type="password" className="form-input" />
